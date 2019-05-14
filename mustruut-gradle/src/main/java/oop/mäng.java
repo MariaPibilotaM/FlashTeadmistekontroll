@@ -10,7 +10,9 @@ public class mäng {
         String k1 = "Mis värvi on banaan?";
         String vastused = "kollane punane lilla";
         küsimused uus = new küsimused(k1,vastused);
-        uus.start();
+        Stage ps = new Stage();
+        uus.start(ps);
+        launch(args);
         launch(args);
         String k2 = "Mis värvi on maasikas?";
         String vastused2="kollane punane lilla";

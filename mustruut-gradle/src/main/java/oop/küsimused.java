@@ -77,8 +77,11 @@ public class küsimused extends Application {
     }
 
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
+        String k1 = "Mis värvi on banaan?";
+        String vastused = "kollane punane lilla";
+        küsimused uus = new küsimused(k1,vastused);
         launch(args);
-    }*/
+    }
 
 }
