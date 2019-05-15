@@ -1,0 +1,2 @@
+﻿Kas sul on hea tuju?;Ei;Jah;Vb;Ei
+Mitu EAP'd annab OOP?;6,7,8,8
