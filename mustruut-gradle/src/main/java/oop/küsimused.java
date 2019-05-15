@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -17,6 +18,7 @@ public class küsimused extends Application {
 
     private String küsimus = "Tere!\nTesti alustamiseks vajuta alumist nuppu :) \n \n";
     private String õigeVastus ="";
+    public ArrayList<String> tulemused = new ArrayList<String>();
 
     //private String[] sisseloetudTekst = new String[2];
     private String[] kasutatavInfo = new String[4];
