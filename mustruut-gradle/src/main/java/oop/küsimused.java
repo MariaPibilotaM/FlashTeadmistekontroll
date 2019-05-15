@@ -10,17 +10,25 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 
 public class küsimused extends Application {
 
     private String küsimus = "Tere!\nTesti alustamiseks vajuta alumist nuppu :) \n \n";
     private String õigeVastus ="";
-    String[] sisseloetudTekst = new String[0];
-    public void start(Stage primaryStage) {
 
+    private String[] sisseloetudTekst = new String[2];
+    private String[] kasutatavInfo = new String[4];
+    private int i = 0;
+
+    public void start(Stage primaryStage) throws IOException {
+        //Loeme failist küsimused sisse
+        Loe a = new Loe();
+        sisseloetudTekst = a.loe().split("\r\n");
         //Pealava nimetuse määramine
         primaryStage.setTitle("OOP testike");
+        System.out.println(Arrays.toString(sisseloetudTekst));
 
         //Küsimuse lisamine
         Label labelfirst= new Label(küsimus);
@@ -30,26 +38,26 @@ public class küsimused extends Application {
         Button button= new Button("Alusta");
 
         button.setOnAction(actionEvent -> {
-            Loe a = new Loe();
-            try {
-                sisseloetudTekst = a.loe().split(";");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            kasutatavInfo = sisseloetudTekst[0].split(";");
             //Uue küsimuse teksti määramine
-            küsimus = sisseloetudTekst[0];
+            küsimus = kasutatavInfo[0];
             labelfirst.setText(küsimus);
             //Uue nuputeksti lisamine
             button.setText("Vasta");
             //õigevastus
-            õigeVastus = sisseloetudTekst[4];
+            õigeVastus = kasutatavInfo[4];
+            System.out.println(õigeVastus);
             //Nuppude väärtustamine
             RadioButton radio1, radio2, radio3;
-            radio1 = new RadioButton(sisseloetudTekst[1]);
-            radio2 = new RadioButton(sisseloetudTekst[2]);
-            radio3 = new RadioButton(sisseloetudTekst[3]);
+            radio1 = new RadioButton(kasutatavInfo[1]);
+            radio1.setUserData(kasutatavInfo[1]);
+            radio2 = new RadioButton(kasutatavInfo[2]);
+            radio2.setUserData(kasutatavInfo[2]);
+            radio3 = new RadioButton(kasutatavInfo[3]);
+            radio3.setUserData(kasutatavInfo[3]);
+
             ToggleGroup question1 = new ToggleGroup();
+            ;
 
             radio1.setToggleGroup(question1);
             radio2.setToggleGroup(question1);
@@ -64,7 +72,17 @@ public class küsimused extends Application {
 
             button.setOnAction(e ->
                     {
-                        if(radio1.getText().equals(õigeVastus) && radio1.isSelected()){
+                        System.out.println(õigeVastus);
+                        System.out.println(question1.getSelectedToggle().getUserData().toString());
+                        if(question1.getSelectedToggle().getUserData().toString().equals(õigeVastus)){
+                            kasutatavInfo = sisseloetudTekst[1].split(";");
+                            labelfirst.setText(kasutatavInfo[0]);
+                            radio1.setUserData(kasutatavInfo[1]);
+                            radio2.setUserData(kasutatavInfo[2]);
+                            radio3.setUserData(kasutatavInfo[3]);
+
+                        }
+                        /*if(radio1.getText().equals(õigeVastus) && radio1.isSelected()){
                             labelresponse.setText("Õige vastus");
                             button.setDisable(true);
                             labelfirst.setText("UUS KÜSIMUS");
@@ -77,7 +95,8 @@ public class küsimused extends Application {
                         } else {
                             labelresponse.setText("Vale vastus");
                             button.setDisable(true);
-                        }
+                        }*/
+
                     }
             );
 

@@ -1,19 +1,26 @@
 package oop;
 
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class Loe {
     public String loe() throws IOException {
-        File fail = new File("C:\\Users\\Maria\\Desktop\\PROJEKT\\küsimused.txt");
-        BufferedReader br = new BufferedReader(
-                new InputStreamReader(new FileInputStream(fail),"UTF8"));
+        File fail = new File("küsimused.txt");
+        /*BufferedReader br = new BufferedReader(
+                new InputStreamReader(new FileInputStream(fail),"UTF8"));*/
 
-        String read = "";
+        String read = Files.readString(fail.toPath(), Charset.forName("UTF-8"));
+        System.out.println(read);
+
+        /*String read = "";
         String line = br.readLine();
-        if (line!=null) {
-            read += line;
+        while (line!= null) {
+            read += line+"\n";
+            line = br.readLine();
         }
-        br.close();
+        br.close();*/
         return read;
     }
 }
