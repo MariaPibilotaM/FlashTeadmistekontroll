@@ -13,7 +13,8 @@ public class Loe {
         return read;
     }
     public void kirjuta(ArrayList sõna) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter("tulemus.txt", true));
+        BufferedWriter writer = new BufferedWriter(new FileWriter("tulemus.txt"));
+        writer.write("UUS KATSE"+ "\n");
         for (int i = 0; i < sõna.size(); i++) {
             writer.append(sõna.get(i) + "\n");
 

@@ -27,10 +27,12 @@ public class küsimused extends Application {
     public void start(Stage primaryStage) throws IOException {
         //Loeme failist küsimused sisse
         Loe a = new Loe();
+
         String[] sisseloetudTekst = a.loe().split("\r\n");
+        System.out.println(Arrays.toString(sisseloetudTekst));
+        System.out.println(sisseloetudTekst.length);
         //Pealava nimetuse määramine
         primaryStage.setTitle("OOP testike");
-        System.out.println(Arrays.toString(sisseloetudTekst));
 
         //Küsimuse lisamine
         Label labelfirst= new Label(küsimus);
@@ -73,34 +75,35 @@ public class küsimused extends Application {
 
             button.setOnAction(e ->
                     {
-                        System.out.println(õigeVastus);
-                        System.out.println(question1.getSelectedToggle().getUserData().toString());
                         if(question1.getSelectedToggle().getUserData().toString().equals(õigeVastus)){
-                            String kirjutatavTekst = i+") Õige";
-                            try {
-                                a.kirjuta(kirjutatavTekst);
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            }
-                        }
-                       else {
+                            String kirjutatavTekst = (i+1)+") Õige";
+                            tulemused.add(kirjutatavTekst);
 
-                            String kirjutatavTekst = i + ") Vale";
-                            try {
-                                a.kirjuta(kirjutatavTekst);
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            }
-                            if (i < sisseloetudTekst.length-1) {
-                                i++;
-                            }
-                            kasutatavInfo = sisseloetudTekst[i].split(";");
-                            labelfirst.setText(kasutatavInfo[0]);
-                            radio1.setText(kasutatavInfo[1]);
-                            radio2.setText(kasutatavInfo[2]);
-                            radio3.setText(kasutatavInfo[3]);
                         }
-                    }
+                       if (!question1.getSelectedToggle().getUserData().toString().equals(õigeVastus)) {
+                           String kirjutatavTekst = (i+1) + ") Vale";
+                           tulemused.add(kirjutatavTekst);
+                       }
+
+                           if (i < sisseloetudTekst.length-1) {
+                               i++;
+                           }
+
+                           if (i == sisseloetudTekst.length) {
+                               try {
+                                   a.kirjuta(tulemused);
+                               } catch (IOException e1) {
+                                   e1.printStackTrace();
+                               }
+                               primaryStage.close();
+                           }
+
+                           kasutatavInfo = sisseloetudTekst[i].split(";");
+                           labelfirst.setText(kasutatavInfo[0]);
+                           radio1.setText(kasutatavInfo[1]);
+                           radio2.setText(kasutatavInfo[2]);
+                           radio3.setText(kasutatavInfo[3]);
+                       }
             );
 
             VBox layout = new VBox(5);
