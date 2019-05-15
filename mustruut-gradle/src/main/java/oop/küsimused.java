@@ -91,11 +91,13 @@ public class küsimused extends Application {
                                i++;
                            }
                         if (i == sisseloetudTekst.length-1) {
+
                             try {
                                 a.kirjuta(tulemused);
                             } catch (IOException e1) {
                                 e1.printStackTrace();
                             }
+
                             primaryStage.close();
                         }
 
