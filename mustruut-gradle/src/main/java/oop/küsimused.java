@@ -83,20 +83,22 @@ public class küsimused extends Application {
                        if (!question1.getSelectedToggle().getUserData().toString().equals(õigeVastus)) {
                            String kirjutatavTekst = (i+1) + ") Vale";
                            tulemused.add(kirjutatavTekst);
+
                        }
 
-                           if (i < sisseloetudTekst.length-1) {
+
+                       if (i < sisseloetudTekst.length-1) {
                                i++;
                            }
+                        if (i == sisseloetudTekst.length-1) {
+                            try {
+                                a.kirjuta(tulemused);
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                            primaryStage.close();
+                        }
 
-                           if (i == sisseloetudTekst.length) {
-                               try {
-                                   a.kirjuta(tulemused);
-                               } catch (IOException e1) {
-                                   e1.printStackTrace();
-                               }
-                               primaryStage.close();
-                           }
 
                            kasutatavInfo = sisseloetudTekst[i].split(";");
                            labelfirst.setText(kasutatavInfo[0]);
