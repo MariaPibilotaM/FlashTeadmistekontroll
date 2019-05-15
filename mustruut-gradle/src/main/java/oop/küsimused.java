@@ -18,14 +18,14 @@ public class küsimused extends Application {
     private String küsimus = "Tere!\nTesti alustamiseks vajuta alumist nuppu :) \n \n";
     private String õigeVastus ="";
 
-    private String[] sisseloetudTekst = new String[2];
+    //private String[] sisseloetudTekst = new String[2];
     private String[] kasutatavInfo = new String[4];
     private int i = 0;
 
     public void start(Stage primaryStage) throws IOException {
         //Loeme failist küsimused sisse
         Loe a = new Loe();
-        sisseloetudTekst = a.loe().split("\r\n");
+        String[] sisseloetudTekst = a.loe().split("\r\n");
         //Pealava nimetuse määramine
         primaryStage.setTitle("OOP testike");
         System.out.println(Arrays.toString(sisseloetudTekst));
@@ -40,13 +40,12 @@ public class küsimused extends Application {
         button.setOnAction(actionEvent -> {
             kasutatavInfo = sisseloetudTekst[0].split(";");
             //Uue küsimuse teksti määramine
-            küsimus = kasutatavInfo[0];
+            küsimus = kasutatavInfo[i];
             labelfirst.setText(küsimus);
             //Uue nuputeksti lisamine
             button.setText("Vasta");
             //õigevastus
             õigeVastus = kasutatavInfo[4];
-            System.out.println(õigeVastus);
             //Nuppude väärtustamine
             RadioButton radio1, radio2, radio3;
             radio1 = new RadioButton(kasutatavInfo[1]);
@@ -75,28 +74,30 @@ public class küsimused extends Application {
                         System.out.println(õigeVastus);
                         System.out.println(question1.getSelectedToggle().getUserData().toString());
                         if(question1.getSelectedToggle().getUserData().toString().equals(õigeVastus)){
-                            kasutatavInfo = sisseloetudTekst[1].split(";");
-                            labelfirst.setText(kasutatavInfo[0]);
-                            radio1.setUserData(kasutatavInfo[1]);
-                            radio2.setUserData(kasutatavInfo[2]);
-                            radio3.setUserData(kasutatavInfo[3]);
-
+                            String kirjutatavTekst = i+") Õige";
+                            try {
+                                a.kirjuta(kirjutatavTekst);
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
                         }
-                        /*if(radio1.getText().equals(õigeVastus) && radio1.isSelected()){
-                            labelresponse.setText("Õige vastus");
-                            button.setDisable(true);
-                            labelfirst.setText("UUS KÜSIMUS");
-                        } else if(radio2.getText().equals(õigeVastus) && radio2.isSelected()){
-                        labelresponse.setText("Õige vastus");
-                        button.setDisable(true);
-                        }else if(radio3.getText().equals(õigeVastus) && radio3.isSelected()){
-                            labelresponse.setText("Õige vastus");
-                            button.setDisable(true);
-                        } else {
-                            labelresponse.setText("Vale vastus");
-                            button.setDisable(true);
-                        }*/
+                       else {
 
+                            String kirjutatavTekst = i + ") Vale";
+                            try {
+                                a.kirjuta(kirjutatavTekst);
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                            if (i < sisseloetudTekst.length-1) {
+                                i++;
+                            }
+                            kasutatavInfo = sisseloetudTekst[i].split(";");
+                            labelfirst.setText(kasutatavInfo[0]);
+                            radio1.setText(kasutatavInfo[1]);
+                            radio2.setText(kasutatavInfo[2]);
+                            radio3.setText(kasutatavInfo[3]);
+                        }
                     }
             );
 
