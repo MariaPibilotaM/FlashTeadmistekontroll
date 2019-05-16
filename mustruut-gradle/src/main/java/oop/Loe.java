@@ -18,13 +18,18 @@ public class Loe {
         }
     }
     public void kirjuta(ArrayList sõna) throws IOException {
+        int kokku = 0;
         try{
             BufferedWriter writer = new BufferedWriter(new FileWriter("tulemus.txt"));
             writer.write("UUS KATSE"+ "\n");
         for (int i = 0; i < sõna.size(); i++) {
+            if(sõna.get(i).toString().contains("Õige")){
+                kokku++;
+            }
             writer.append(sõna.get(i) + "\n");
 
         }
+            System.out.println("Sinu tulemus oli: "+kokku+"/"+sõna.size());
         writer.close();}
         catch (FailiLugErind e){
             throw new FailiLugErind("Error! ","Ei saanud faili kirjutada :(");
