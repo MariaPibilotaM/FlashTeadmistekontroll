@@ -1,5 +1,6 @@
 UUS KATSE
 1) Õige
 2) Õige
-3) Vale
+3) Õige
 4) Õige
+5) Õige

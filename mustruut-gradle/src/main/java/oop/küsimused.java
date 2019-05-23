@@ -26,6 +26,7 @@ public class küsimused extends Application {
     //Valikvastused ja õige vastus
     private String[] kasutatavInfo = new String[4];
     private int i = 0;
+    private int kokku = 0;
 
     public void start(Stage primaryStage) throws IOException {
         //Loeme failist küsimused sisse
@@ -38,7 +39,6 @@ public class küsimused extends Application {
 
         //Küsimuse lisamine
         Label labelfirst= new Label(küsimus);
-        Label labelresponse= new Label();
 
         //Vastamise nupp
         Button button= new Button("Alusta");
@@ -95,7 +95,7 @@ public class küsimused extends Application {
                         //Suurendame i'd
                         i++;
                         //Kui oleme jõudnud faili lõppu
-                        if (i == failiRead.length - 1) {
+                        if (i == failiRead.length) {
                             //Kirjutame ja ss sulgeme akna
                             try {
                                 a.kirjuta(tulemused);
@@ -103,7 +103,25 @@ public class küsimused extends Application {
                                 System.out.println("Error! Ei saa faili kirjutada");
                                 e1.printStackTrace();
                             }
-                            primaryStage.close();
+                            for (int j = 0; j < tulemused.size(); j++) {
+                                if(tulemused.get(j).toString().contains("Õige")){
+                                    kokku++;
+                                }
+                            }
+                            labelfirst.setText("Sinu skoor oli: "+kokku+"/"+tulemused.size());
+                            button.setText("Lahku");
+                            VBox layout = new VBox(5);
+                            layout.setAlignment(Pos.CENTER);
+
+                            layout.getChildren().addAll( radio1, radio2, radio3);
+                            button.setOnAction(event -> {
+                                primaryStage.close();
+
+
+                            });
+
+
+
                         }
                         else {//Muudame i väärtust ja liigume uue küsimuse juurde
                             kasutatavInfo = failiRead[i].split(";");
@@ -122,7 +140,7 @@ public class küsimused extends Application {
             VBox layout = new VBox(5);
             layout.setAlignment(Pos.CENTER);
 
-            layout.getChildren().addAll(labelfirst, radio1, radio2, radio3, button, labelresponse);
+            layout.getChildren().addAll(labelfirst, radio1, radio2, radio3, button);
 
             Scene scene1 = new Scene(layout, 400, 250);
             primaryStage.setScene(scene1);
@@ -133,7 +151,7 @@ public class küsimused extends Application {
         VBox layout= new VBox(5);
         layout.setAlignment(Pos.CENTER);
 
-        layout.getChildren().addAll(labelfirst, button, labelresponse);
+        layout.getChildren().addAll(labelfirst, button);
 
         Scene scene1= new Scene(layout, 400, 250);
         primaryStage.setScene(scene1);

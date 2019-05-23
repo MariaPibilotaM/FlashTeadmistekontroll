@@ -1,5 +1,5 @@
 ﻿Mitu EAP'd annab OOP?;6;7;8;6
 Mis on otseselt algoritmilisi tegevusi krjeldav lause?;Pärilus;Tingimusavaldis;Direktiiv;Direktiiv
-Milline on järelkontrolliga tsükkel?;for;while;do-while;do-while
+Milline on järelkontrolliga tsükkel?;for;do-while;while;do-while
 Milline on üldtsüklidirektiiv?;for;do-while;while;for
-Lõpp
+Mitu punkti peab vähemalt saama, et läbida OOP'i?;55;51;50;51
